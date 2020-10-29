@@ -3,13 +3,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({
+
+workouts: [{
+  
   name: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
   type: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
   weight: {
     type: Number,
@@ -27,8 +32,14 @@ const WorkoutSchema = new Schema({
     type: Number,
     unique: true
   }
+}]
+  // schema.set('toJSON', {
+  //   virtuals: true
+  // });
   
 });
+
+
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
