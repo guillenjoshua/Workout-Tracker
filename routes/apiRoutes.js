@@ -1,22 +1,22 @@
 const { Workout } = require("../models");
 var db = require("../models");
-const path = require ("path");
+
 
 module.exports = function(app) {
 
 
-    // app.get("/all", (req, res) => {
+    app.get("/all", (req, res) => {
 
-    //     db.Workout.find({})
-    //         .then(dbWorkout => {
-    //             res.json(dbWorkout);
-    //         })
-    //         .catch(err => {
-    //             res.json(err);
-    //         })
-    // })
+        db.Workout.find({})
+            .then(dbWorkout => {
+                res.json(dbWorkout);
+            })
+            .catch(err => {
+                res.json(err);
+            })
+    })
 
-    app.get("/api/workouts", ({body}, res) => {
+    app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
         .then(dbWorkout => {
             res.json(dbWorkout);
@@ -26,7 +26,7 @@ module.exports = function(app) {
         })
     })
 
-    app.get("/api/workouts/range", ({body}, res) => {
+    app.get("/api/workouts/range", (req, res) => {
         db.Workout.find({})
         .then(dbWorkout => {
             res.json(dbWorkout);
@@ -50,24 +50,30 @@ module.exports = function(app) {
         })
     })
 
+            //????????
+    app.put("/api/workouts/:id", ({body}, res) => {
+        db.Workout.findOneAndUpdate(body) 
 
-    app.post("/api/workouts/:id", ({body}, res) => {
-        db.Workout.create(body)
-        
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err);
+        })
     })
 
 
-    app.get("/stats", (req, res) => {
-        db.Workout.find({})
-        .populate("workouts")
-        .then(dbWorkout => {
-          res.json(dbWorkout);
-        })
-        .catch(err => {
-          res.json(err);
-        });
+    // app.get("/stats", (req, res) => {
+    //     db.Workout.find({})
+    //     .populate("workouts")
+    //     .then(dbWorkout => {
+    //       res.json(dbWorkout);
+    //     })
+    //     .catch(err => {
+    //       res.json(err);
+    //     });
       
-      });
+    //   });
 
 
 

@@ -6,37 +6,43 @@ const WorkoutSchema = new Schema({
 
 workouts: [{
   
-  name: {
-    type: String,
-    unique: true,
-    required: true
-  },
   type: {
     type: String,
     unique: true,
+    trim: true,
+    required: true
+  },
+  name: {
+    type: String,
+    unique: true, //What is unique
+    trim: true,
     required: true
   },
   weight: {
-    type: Number,
-    unique: true
+    type: Number
+  
   },
   sets: {
-    type: Number,
-    unique: true
+    type: Number
+   
   },
   reps: {
-    type: Number,
-    unique: true
+    type: Number
+
+    
+  },
+  distance: {
+    type: Number
+  
+  
   },
   duration: {
-    type: Number,
-    unique: true
+    type: Number
+  
+    
   }
 }]
-  // schema.set('toJSON', {
-  //   virtuals: true
-  // });
-  
+
 });
 
 
