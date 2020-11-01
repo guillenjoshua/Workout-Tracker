@@ -5,16 +5,6 @@ var db = require("../models");
 module.exports = function(app) {
 
 
-    app.get("/all", (req, res) => {
-
-        db.Workout.find({})
-            .then(dbWorkout => {
-                res.json(dbWorkout);
-            })
-            .catch(err => {
-                res.json(err);
-            })
-    })
 
     app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
@@ -37,11 +27,12 @@ module.exports = function(app) {
 
     })
 
+ 
 
-
+  
                             //What is body?
-    app.post("/api/workouts", ({body}, res) => {
-        db.Workout.create(body)
+    app.post("/api/workouts", (req, res) => {
+        db.Workout.create(req.body)
         .then(dbWorkout => {
             res.json(dbWorkout);
         })
@@ -51,8 +42,10 @@ module.exports = function(app) {
     })
 
             //????????
-    app.put("/api/workouts/:id", ({body}, res) => {
-        db.Workout.findOneAndUpdate(body) 
+    app.put("/api/workouts/:id", ({body,params}, res) => {
+        db.Workout.findOneAndUpdate({
+            _id: params.id
+        }, {$push:{exercises: body}}) 
 
         .then(dbWorkout => {
             res.json(dbWorkout);
@@ -61,22 +54,6 @@ module.exports = function(app) {
             res.json(err);
         })
     })
-
-
-    // app.get("/stats", (req, res) => {
-    //     db.Workout.find({})
-    //     .populate("workouts")
-    //     .then(dbWorkout => {
-    //       res.json(dbWorkout);
-    //     })
-    //     .catch(err => {
-    //       res.json(err);
-    //     });
-      
-    //   });
-
-
-
 
 
 
