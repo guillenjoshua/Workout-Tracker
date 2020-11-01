@@ -28,9 +28,7 @@ module.exports = function(app) {
     })
 
  
-
-  
-                            //What is body?
+                          
     app.post("/api/workouts", (req, res) => {
         db.Workout.create(req.body)
         .then(dbWorkout => {
@@ -41,7 +39,7 @@ module.exports = function(app) {
         })
     })
 
-            //????????
+      
     app.put("/api/workouts/:id", ({body,params}, res) => {
         db.Workout.findOneAndUpdate({
             _id: params.id
